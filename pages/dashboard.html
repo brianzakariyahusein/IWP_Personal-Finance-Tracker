@@ -51,15 +51,15 @@
                 <div class="summary">
                     <div class="card">
                         <h3>Total Balance</h3>
-                        <p class="amount">Rp 5.200.000</p>
+                        <p class="amount" id="balance">Rp 0</p>
                     </div>
                     <div class="card">
                         <h3>Income</h3>
-                        <p class="amount income">Rp 7.000.000</p>
+                        <p class="amount income" id="income">Rp 0</p>
                     </div>
                     <div class="card">
                         <h3>Expense</h3>
-                        <p class="amount expense">Rp 1.800.000</p>
+                        <p class="amount expense" id="expense">Rp 0</p>
                     </div>
                 </div>
 
@@ -78,27 +78,14 @@
                 <!-- Recent Transactions -->
                 <div class="card">
                     <h3>Recent Transactions</h3>
-
-                    <div class="transactions">
-                        <span>Beli kopi</span>
-                        <span class="expense">- Rp 20.000</span>
-                    </div>
-
-                    <div class="transactions">
-                        <span>Gaji</span>
-                        <span class="expense">+ Rp 5.000.000</span>
-                    </div>
-
-                    <div class="transactions">
-                        <span>Transport</span>
-                        <span class="expense">- Rp 50.000</span>
-                    </div>
-
+                    <div id="recentTransactions"></div>
                 </div>
 
             </section>
         </main>
     </div>
+    <script src="../js/storage.js"></script>
+    <script src="../js/ui.js"></script>
 </body>
 
 </html>
