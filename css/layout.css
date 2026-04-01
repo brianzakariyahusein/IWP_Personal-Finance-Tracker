@@ -1,0 +1,44 @@
+.app {
+    display: flex;
+}
+
+/* sidebar */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #111827;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.sidebar nav a:hover {
+    background: #1f2937;
+}
+
+/* Main */
+.main {
+    flex: 1;
+}
+
+/* Topbar */
+.topbar {
+    background: white;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+/* content */
+.content {
+    padding: 20px;
+}
