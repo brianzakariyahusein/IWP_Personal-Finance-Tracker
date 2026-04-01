@@ -2,4 +2,8 @@
     .sidebar {
         display: none;
     }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
 }
