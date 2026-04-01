@@ -1,3 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    seedDummyData();
-})
+  seedDummyData();
+  seedBudget();
+  seedGoals();
+});
