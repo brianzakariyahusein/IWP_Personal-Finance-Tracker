@@ -14,3 +14,24 @@ function addTransaction(transaction) {
   transactions.push(transaction);
   saveTransactions(transactions);
 }
+
+// Dummy Data
+function seedDummyData() {
+  if (getTransactions().length === 0) {
+    const Dummy = [
+      {
+        id: 1,
+        title: "Gaji",
+        amount: 5000000,
+        type: "income",
+      },
+      {
+        id: 2,
+        title: "Beli Kopi",
+        amount: 20000,
+        type: "expense",
+      },
+    ];
+    saveTransactions(dummy);
+  }
+}
