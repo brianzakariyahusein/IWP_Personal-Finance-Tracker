@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - FinTrack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7FF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #1A1A2E;
+        }
+
+        .logo {
+            position: absolute;
+            top: 24px;
+            left: 32px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #7C5CFC;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .logo span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A1A2E;
+        }
+
+        .error-container {
+            text-align: center;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-number {
+            font-size: 160px;
+            font-weight: 700;
+            color: #E5E7EB;
+            line-height: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .coin {
+            width: 120px;
+            height: 120px;
+            background-color: #EDE9FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            animation: spin 3s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+
+            0%,
+            100% {
+                transform: rotateY(0deg);
+            }
+
+            50% {
+                transform: rotateY(180deg);
+            }
+        }
+
+        .error-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 24px;
+            color: #1A1A2E;
+        }
+
+        .error-subtitle {
+            font-size: 14px;
+            color: #6B7280;
+            margin-top: 8px;
+        }
+
+        .btn-home {
+            display: inline-block;
+            margin-top: 32px;
+            padding: 14px 32px;
+            background-color: #7C5CFC;
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 92, 252, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+        <div class="logo-icon">F</div>
+        <span>FinTrack</span>
+    </a>
+
+    <!-- Error Content -->
+    <div class="error-container">
+        <div class="error-number">
+            <span>4</span>
+            <div class="coin">💰</div>
+            <span>4</span>
+        </div>
+        <h1 class="error-title">Oops! This page exceeded the budget</h1>
+        <p class="error-subtitle">It seems this page went over our budget. Let's go back and find something more
+            economical!</p>
+        <a href="index.html" class="btn-home">Back to home</a>
+    </div>
+
+</body>
+
+</html>

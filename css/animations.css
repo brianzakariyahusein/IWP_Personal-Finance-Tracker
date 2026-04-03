@@ -1,0 +1,76 @@
+/* ===== FADE IN ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== SLIDE IN dari kiri ===== */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== Terapkan ke section saat active ===== */
+.section.active {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== Terapkan ke card ===== */
+.card {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ===== Terapkan ke nav-item ===== */
+.nav-item {
+  animation: slideInLeft 0.3s ease forwards;
+}
+
+/* ===== Progress bar animasi saat load ===== */
+.progress-fill {
+  animation: growWidth 0.8s ease forwards;
+}
+
+@keyframes growWidth {
+  from {
+    width: 0% !important;
+  }
+  to {
+    width: var(--target-width);
+  }
+}
+
+/* ===== Summary card hover effect ===== */
+.summary-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(124, 92, 252, 0.15);
+}
+
+/* ===== Tombol hover effect ===== */
+.btn-primary {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 92, 252, 0.3);
+}

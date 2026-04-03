@@ -119,8 +119,10 @@ body {
 .main-content {
   margin-left: 240px;
   flex: 1;
-  padding: 24px 32px;
-  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 /* ===== TOPBAR ===== */
@@ -128,7 +130,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 28px;
+  padding: 24px 32px;
+  flex-shrink: 0;
+  background-color: var(--bg-main);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .page-title {
@@ -199,6 +206,19 @@ body {
   display: block;
 }
 
+.section-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 32px 32px 32px;
+}
+
+#section-dashboard {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  height: auto;
+}
+
 /* ===== WELCOME TEXT ===== */
 .welcome-text {
   margin-bottom: 24px;
@@ -266,17 +286,17 @@ body {
 }
 
 .badge-success {
-  background-color: #DCFCE7;
+  background-color: #dcfce7;
   color: var(--success);
 }
 
 .badge-danger {
-  background-color: #FEE2E2;
+  background-color: #fee2e2;
   color: var(--danger);
 }
 
 .badge-warning {
-  background-color: #FEF3C7;
+  background-color: #fef3c7;
   color: var(--warning);
 }
 
@@ -288,10 +308,80 @@ body {
   margin-bottom: 16px;
 }
 
+.dashboard-middle .card {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-middle .card .card-header {
+  flex-shrink: 0;
+}
+
+.dashboard-middle .card > div[id] {
+  overflow-y: auto;
+  max-height: 220px;
+}
+
 /* ===== RECENT TRANSACTIONS (full width) ===== */
 .recent-transactions {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.recent-transactions .transaction-table {
   width: 100%;
 }
+
+.recent-transactions .transaction-table-wrapper {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+.pagination button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-gray);
+  transition: all 0.2s;
+}
+
+.pagination button:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.pagination button.active-page {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-size: 12px;
+  color: var(--text-gray);
+}
+
 .card-header {
   display: flex;
   align-items: center;
@@ -361,12 +451,12 @@ body {
 }
 
 .status-successful {
-  background-color: #DCFCE7;
+  background-color: #dcfce7;
   color: var(--success);
 }
 
 .status-cancelled {
-  background-color: #FEE2E2;
+  background-color: #fee2e2;
   color: var(--danger);
 }
 
@@ -417,3 +507,7 @@ body {
   margin-top: 4px;
 }
 
+.dashboard-middle .card .pagination {
+  flex-shrink: 0;
+  padding-top: 8px;
+}
