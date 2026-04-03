@@ -1,4 +1,4 @@
-/* ===================================================
+/*
    FINTRACK — STYLE.CSS
    Urutan:
    1. Variables & Reset
@@ -9,9 +9,9 @@
    6. Section Pages (Goals, Budget)
    7. Modal & Form
    8. Tombol (Button)
-   =================================================== */
+*/
 
-/* ===== 1. VARIABLES & RESET ===== */
+/* 1. VARIABLES & RESET */
 :root {
   --primary: #7c5cfc;
   --primary-light: #ede9ff;
@@ -41,8 +41,7 @@ body {
   min-height: 100vh;
 }
 
-/* ===== 2. LAYOUT ===== */
-
+/* 2. LAYOUT */
 /* --- Sidebar --- */
 .sidebar {
   width: 240px;
@@ -129,7 +128,7 @@ body {
   padding-top: 16px;
 }
 
-/* --- Main Content --- */
+/* Main Content */
 .main-content {
   margin-left: 240px;
   flex: 1;
@@ -139,7 +138,7 @@ body {
   height: 100vh;
 }
 
-/* --- Topbar --- */
+/* Topbar */
 .topbar {
   display: flex;
   align-items: center;
@@ -211,7 +210,7 @@ body {
   color: var(--text-gray);
 }
 
-/* ===== 3. SECTION & WRAPPER ===== */
+/* 3. SECTION & WRAPPER */
 .section-wrapper {
   flex: 1;
   overflow-y: auto;
@@ -228,20 +227,13 @@ body {
   display: block;
 }
 
-/*
-  FIX BUG: Dulu #section-dashboard punya "display: flex" sendiri.
-  Karena ID selector lebih kuat dari class selector, dashboard selalu
-  tampil meski sudah di-hide oleh JS. Solusinya: tambahkan .active
-  supaya display:flex hanya aktif saat section ini memang aktif.
-*/
 #section-dashboard.active {
   display: flex;
   flex-direction: column;
 }
 
-/* ===== 4. DASHBOARD ===== */
-
-/* --- Welcome text --- */
+/* 4. DASHBOARD */
+/* Welcome text */
 .welcome-text {
   margin-bottom: 24px;
 }
@@ -258,7 +250,7 @@ body {
   margin-top: 4px;
 }
 
-/* --- Summary Cards (4 kolom) --- */
+/* Summary Cards (4 kolom) */
 .summary-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -298,7 +290,7 @@ body {
   color: var(--danger);
 }
 
-/* --- Dashboard Middle (Budget + Goals, 2 kolom) --- */
+/* Dashboard Middle (Budget + Goals, 2 kolom) */
 .dashboard-middle {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -321,7 +313,7 @@ body {
   padding-top: 8px;
 }
 
-/* --- Recent Transactions (full width) --- */
+/* Recent Transactions (full width) */
 .recent-transactions {
   display: flex;
   flex-direction: column;
@@ -333,7 +325,7 @@ body {
   overflow-y: auto;
 }
 
-/* --- Card Header --- */
+/* Card Header */
 .card-header {
   display: flex;
   align-items: center;
@@ -359,9 +351,9 @@ body {
   text-decoration: underline;
 }
 
-/* ===== 5. KOMPONEN UI ===== */
+/* 5. KOMPONEN UI */
 
-/* --- Badge --- */
+/* Badge */
 .card-badge {
   font-size: 12px;
   font-weight: 500;
@@ -383,7 +375,7 @@ body {
   color: var(--warning);
 }
 
-/* --- Status Badge (di tabel) --- */
+/* Status Badge (di tabel) */
 .status-badge {
   padding: 4px 10px;
   border-radius: 20px;
@@ -400,7 +392,7 @@ body {
   color: var(--danger);
 }
 
-/* --- Pagination --- */
+/* Pagination */
 .pagination {
   display: flex;
   align-items: center;
@@ -439,7 +431,7 @@ body {
   cursor: not-allowed;
 }
 
-/* --- Transaction Table --- */
+/* Transaction Table */
 .transaction-table {
   width: 100%;
   border-collapse: collapse;
@@ -475,7 +467,7 @@ body {
   font-weight: 600;
 }
 
-/* --- Progress Bar --- */
+/* Progress Bar */
 .progress-bar {
   width: 100%;
   height: 8px;
@@ -491,7 +483,7 @@ body {
   transition: width 0.6s ease;
 }
 
-/* --- Goal Item (di dashboard widget) --- */
+/* Goal Item (di dashboard widget) */
 .goal-item {
   margin-bottom: 20px;
 }
@@ -523,9 +515,9 @@ body {
   margin-top: 4px;
 }
 
-/* ===== 6. SECTION PAGES ===== */
+/* 6. SECTION PAGES */
 
-/* --- Toolbar (atas setiap section page) --- */
+/* Toolbar (atas setiap section page) */
 .section-toolbar {
   display: flex;
   align-items: center;
@@ -560,7 +552,7 @@ body {
   border-color: var(--primary);
 }
 
-/* --- Goals Grid (3 kolom) --- */
+/* Goals Grid (3 kolom) */
 .goals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -593,7 +585,7 @@ body {
   margin-top: 8px;
 }
 
-/* --- Budget Grid (2 kolom) --- */
+/* Budget Grid (2 kolom) */
 .budget-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -623,7 +615,7 @@ body {
   gap: 8px;
 }
 
-/* ===== 7. MODAL & FORM ===== */
+/* 7. MODAL & FORM */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -711,7 +703,7 @@ body {
   box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.1);
 }
 
-/* ===== 8. TOMBOL ===== */
+/* 8. TOMBOL */
 .btn-primary {
   padding: 10px 20px;
   background-color: var(--primary);

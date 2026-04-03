@@ -1,4 +1,3 @@
-// ============================================================
 // APP.JS — FinTrack Personal Finance Tracker
 //
 // File ini mengatur semua logika tampilan website.
@@ -14,9 +13,7 @@
 //   6. BUDGET        — tampilkan kartu budget
 //   7. MODAL         — buka/tutup modal (tampilan saja)
 //   8. INIT          — jalankan pertama kali saat halaman dibuka
-// ============================================================
 
-// ============================================================
 // 1. NAVIGASI
 // Mengatur perpindahan antar section saat nav-item diklik.
 // Cara kerja:
@@ -24,7 +21,6 @@
 //   - Section yang dipilih ditampilkan (tambah class 'active')
 //   - Judul topbar diubah sesuai section
 //   - Fungsi render section yang sesuai dipanggil
-// ============================================================
 
 var navItems = document.querySelectorAll(".nav-item[data-section]");
 var sections = document.querySelectorAll(".section");
