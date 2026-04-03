@@ -39,16 +39,7 @@
 
 /* ===== Progress bar animasi saat load ===== */
 .progress-fill {
-  animation: growWidth 0.8s ease forwards;
-}
-
-@keyframes growWidth {
-  from {
-    width: 0% !important;
-  }
-  to {
-    width: var(--target-width);
-  }
+  transition: width 0.6s ease;
 }
 
 /* ===== Summary card hover effect ===== */

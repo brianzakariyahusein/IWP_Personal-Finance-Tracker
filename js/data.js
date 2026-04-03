@@ -1,4 +1,27 @@
-// ===== DATA DUMMY =====
+// ============================================================
+// DATA.JS — FinTrack Personal Finance Tracker
+//
+// File ini HANYA berisi data dummy (data contoh).
+// Semua data di sini bersifat statis — tidak ada yang disimpan
+// ke localStorage atau database manapun.
+//
+// Isi file ini:
+//   1. transactions — daftar transaksi keuangan
+//   2. goals        — daftar saving goals
+//   3. budgets      — daftar budget per kategori
+// ============================================================
+
+// ============================================================
+// 1. TRANSACTIONS
+// Setiap transaksi punya properti:
+//   id       : nomor unik
+//   date     : tanggal transaksi (format YYYY-MM-DD)
+//   name     : nama/deskripsi transaksi
+//   amount   : jumlah uang (angka)
+//   type     : 'income' (pemasukan) atau 'expense' (pengeluaran)
+//   category : kategori transaksi
+//   status   : 'successful' atau 'cancelled'
+// ============================================================
 
 const transactions = [
   {
@@ -7,7 +30,6 @@ const transactions = [
     name: "Cashback rewards",
     amount: 25,
     type: "income",
-    method: "VISA **3254",
     category: "Cashback",
     status: "successful",
   },
@@ -17,7 +39,6 @@ const transactions = [
     name: "Refund from XYZ Store",
     amount: 75,
     type: "income",
-    method: "VISA **3254",
     category: "Refund",
     status: "successful",
   },
@@ -27,7 +48,6 @@ const transactions = [
     name: "Investment dividends",
     amount: 100,
     type: "income",
-    method: "Mastercard **2154",
     category: "Investment",
     status: "successful",
   },
@@ -37,7 +57,6 @@ const transactions = [
     name: "Freelance project payment",
     amount: 390,
     type: "income",
-    method: "PayPal",
     category: "Salary",
     status: "successful",
   },
@@ -47,7 +66,6 @@ const transactions = [
     name: "YouTube subscription",
     amount: 10,
     type: "expense",
-    method: "VISA **3254",
     category: "Entertainment",
     status: "successful",
   },
@@ -57,7 +75,6 @@ const transactions = [
     name: "Grocery shopping",
     amount: 150,
     type: "expense",
-    method: "Mastercard **2154",
     category: "Food & Groceries",
     status: "successful",
   },
@@ -67,7 +84,6 @@ const transactions = [
     name: "Electricity bill",
     amount: 80,
     type: "expense",
-    method: "Mastercard **2154",
     category: "Bills & Utilities",
     status: "successful",
   },
@@ -77,7 +93,6 @@ const transactions = [
     name: "Gym membership",
     amount: 50,
     type: "expense",
-    method: "VISA **3254",
     category: "Health & Beauty",
     status: "successful",
   },
@@ -87,7 +102,6 @@ const transactions = [
     name: "Online course",
     amount: 200,
     type: "expense",
-    method: "PayPal",
     category: "Education",
     status: "cancelled",
   },
@@ -97,11 +111,21 @@ const transactions = [
     name: "Paycheck from ABC Company",
     amount: 1500,
     type: "income",
-    method: "VISA **3254",
     category: "Salary",
     status: "successful",
   },
 ];
+
+// ============================================================
+// 2. GOALS
+// Setiap goal punya properti:
+//   id      : nomor unik
+//   name    : nama goal
+//   target  : jumlah uang yang ingin dicapai
+//   saved   : jumlah uang yang sudah ditabung
+//   dueDate : target tanggal selesai
+//   status  : 'in-progress', 'finished', atau 'cancelled'
+// ============================================================
 
 const goals = [
   {
@@ -129,6 +153,16 @@ const goals = [
     status: "in-progress",
   },
 ];
+
+// ============================================================
+// 3. BUDGETS
+// Setiap budget punya properti:
+//   id       : nomor unik
+//   category : nama kategori pengeluaran
+//   limit    : batas maksimal pengeluaran bulan ini
+//   spent    : jumlah yang sudah dikeluarkan bulan ini
+//   icon     : emoji untuk tampilan visual
+// ============================================================
 
 const budgets = [
   {
