@@ -1,5 +1,3 @@
-
-
 // ===== NAVIGATION =====
 // 1. Ambil semua nav-item dan semua section
 const navItems = document.querySelectorAll(".nav-item[data-section]");
@@ -290,5 +288,5 @@ function renderDashboardBudget() {
 }
 
 // ===== JALANKAN SAAT HALAMAN PERTAMA LOAD =====
-renderDashboard();
 initStorage();
+renderDashboard();
