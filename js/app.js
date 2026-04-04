@@ -1,33 +1,8 @@
-// APP.JS — FinTrack Personal Finance Tracker
-//
-// File ini mengatur semua logika tampilan website.
-// Data diambil langsung dari data.js (array statis).
-// Tidak ada localStorage, tidak ada simpan/hapus data.
-//
-// Urutan isi file ini:
-//   1. NAVIGASI      — pindah antar section
-//   2. HELPER        — fungsi bantu (format angka, pagination)
-//   3. DASHBOARD     — tampilkan summary cards + 3 widget
-//   4. TRANSACTIONS  — tampilkan tabel transaksi + filter
-//   5. GOALS         — tampilkan kartu saving goals
-//   6. BUDGET        — tampilkan kartu budget
-//   7. MODAL         — buka/tutup modal (tampilan saja)
-//   8. INIT          — jalankan pertama kali saat halaman dibuka
-
-// 1. NAVIGASI
-// Mengatur perpindahan antar section saat nav-item diklik.
-// Cara kerja:
-//   - Semua section disembunyikan (hapus class 'active')
-//   - Section yang dipilih ditampilkan (tambah class 'active')
-//   - Judul topbar diubah sesuai section
-//   - Fungsi render section yang sesuai dipanggil
-
 var navItems = document.querySelectorAll(".nav-item[data-section]");
 var sections = document.querySelectorAll(".section");
 var pageTitle = document.getElementById("pageTitle");
 
 function navigateTo(sectionName) {
-  // Sembunyikan semua section dan nonaktifkan semua nav
   navItems.forEach(function (item) {
     item.classList.remove("active");
   });
@@ -35,7 +10,6 @@ function navigateTo(sectionName) {
     sec.classList.remove("active");
   });
 
-  // Aktifkan nav dan section yang sesuai
   var activeNav = document.querySelector(
     '.nav-item[data-section="' + sectionName + '"]',
   );
@@ -44,18 +18,15 @@ function navigateTo(sectionName) {
   var activeSection = document.getElementById("section-" + sectionName);
   if (activeSection) activeSection.classList.add("active");
 
-  // Update judul topbar
   pageTitle.textContent =
     sectionName.charAt(0).toUpperCase() + sectionName.slice(1);
 
-  // Render konten section yang dipilih
   if (sectionName === "dashboard") renderDashboard();
   if (sectionName === "transactions") renderTransactions();
   if (sectionName === "goals") renderGoals();
   if (sectionName === "budget") renderBudget();
 }
 
-// Event listener untuk setiap nav-item di sidebar
 navItems.forEach(function (item) {
   item.addEventListener("click", function (e) {
     e.preventDefault();
@@ -63,7 +34,6 @@ navItems.forEach(function (item) {
   });
 });
 
-// Event listener untuk link "See all →" di dashboard
 var seeAllLinks = document.querySelectorAll(".see-all[data-section]");
 seeAllLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
@@ -72,21 +42,15 @@ seeAllLinks.forEach(function (link) {
   });
 });
 
-// 2. HELPER
-// Fungsi bantu yang dipakai berulang di banyak tempat.
-
-// Format angka ke Rupiah — contoh: 1500 → "Rp 1,500.00"
 function formatCurrency(amount) {
   return "Rp " + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// Potong array sesuai halaman — contoh: paginate([1..10], 2, 5) → [6..10]
 function paginate(data, page, perPage) {
   var start = (page - 1) * perPage;
   return data.slice(start, start + perPage);
 }
 
-// Buat tombol pagination ← 1 2 3 → di dalam container
 function renderPagination(
   containerId,
   totalItems,
@@ -100,7 +64,6 @@ function renderPagination(
 
   if (totalPages <= 1) return; // tidak perlu pagination kalau cuma 1 halaman
 
-  // Tombol ← kembali
   var prevBtn = document.createElement("button");
   prevBtn.textContent = "←";
   prevBtn.disabled = currentPage === 1;
@@ -109,7 +72,6 @@ function renderPagination(
   });
   container.appendChild(prevBtn);
 
-  // Tombol nomor halaman — pakai IIFE agar nilai i tidak berubah di closure
   for (var i = 1; i <= totalPages; i++) {
     (function (pageNum) {
       var btn = document.createElement("button");
@@ -122,7 +84,6 @@ function renderPagination(
     })(i);
   }
 
-  // Tombol → maju
   var nextBtn = document.createElement("button");
   nextBtn.textContent = "→";
   nextBtn.disabled = currentPage === totalPages;
@@ -132,13 +93,9 @@ function renderPagination(
   container.appendChild(nextBtn);
 }
 
-// 3. DASHBOARD
-// Menampilkan ringkasan keuangan di halaman utama.
-
 var dashPage = { transactions: 1, goals: 1, budget: 1 };
 var DASH_PER_PAGE = 5;
 
-// Hitung total income dari array transactions
 function getTotalIncome() {
   var total = 0;
   transactions.forEach(function (t) {
@@ -147,7 +104,6 @@ function getTotalIncome() {
   return total;
 }
 
-// Hitung total expense dari array transactions
 function getTotalExpense() {
   var total = 0;
   transactions.forEach(function (t) {
@@ -156,7 +112,6 @@ function getTotalExpense() {
   return total;
 }
 
-// Hitung total yang sudah ditabung dari semua goals
 function getTotalSavings() {
   var total = 0;
   goals.forEach(function (g) {
@@ -165,12 +120,10 @@ function getTotalSavings() {
   return total;
 }
 
-// Fungsi utama dashboard
 function renderDashboard() {
   var income = getTotalIncome();
   var expense = getTotalExpense();
 
-  // Isi angka di 4 summary cards
   document.getElementById("totalBalance").textContent = formatCurrency(
     income - expense,
   );
@@ -184,7 +137,6 @@ function renderDashboard() {
   renderDashboardBudget();
 }
 
-// Widget recent transactions
 function renderDashboardTransactions() {
   var tbody = document.getElementById("recentTransactionsList");
   tbody.innerHTML = "";
@@ -234,7 +186,6 @@ function renderDashboardTransactions() {
   );
 }
 
-// Widget saving goals
 function renderDashboardGoals() {
   var container = document.getElementById("goalsList");
   container.innerHTML = "";
@@ -279,7 +230,6 @@ function renderDashboardGoals() {
   );
 }
 
-// Widget budget
 function renderDashboardBudget() {
   var container = document.getElementById("dashboardBudgetList");
   container.innerHTML = "";
@@ -336,9 +286,6 @@ function renderDashboardBudget() {
   );
 }
 
-// 4. TRANSACTIONS
-// Tabel semua transaksi dengan filter tipe & kategori.
-
 var transPage = 1;
 var TRANS_PER_PAGE = 8;
 
@@ -346,7 +293,6 @@ function renderTransactions() {
   var filterType = document.getElementById("filterType").value;
   var filterCategory = document.getElementById("filterCategory").value;
 
-  // Salin array lalu filter
   var data = transactions.slice();
   if (filterType !== "all") {
     data = data.filter(function (t) {
@@ -414,7 +360,6 @@ function renderTransactions() {
   );
 }
 
-// Isi dropdown kategori dari data transaksi
 function populateCategoryFilter() {
   var select = document.getElementById("filterCategory");
   var current = select.value;
@@ -435,7 +380,6 @@ function populateCategoryFilter() {
   });
 }
 
-// Re-render otomatis saat filter berubah
 document.getElementById("filterType").addEventListener("change", function () {
   transPage = 1;
   renderTransactions();
@@ -446,9 +390,6 @@ document
     transPage = 1;
     renderTransactions();
   });
-
-// 5. GOALS
-// Grid kartu saving goals.
 
 function renderGoals() {
   var grid = document.getElementById("goalsGrid");
@@ -489,9 +430,6 @@ function renderGoals() {
     grid.appendChild(card);
   });
 }
-
-// 6. BUDGET
-// Grid kartu budget per kategori.
 
 function renderBudget() {
   var grid = document.getElementById("budgetGrid");
@@ -539,11 +477,7 @@ function renderBudget() {
   });
 }
 
-// 7. MODAL
-// Buka/tutup modal saja — tombol Save tidak menyimpan data.
-
 document.addEventListener("DOMContentLoaded", function () {
-  // Transaction
   document
     .getElementById("btnAddTransaction")
     .addEventListener("click", function () {
@@ -574,7 +508,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-  // Goal
   document.getElementById("btnAddGoal").addEventListener("click", function () {
     document.getElementById("modalGoal").classList.add("open");
   });
@@ -601,7 +534,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Budget
   document
     .getElementById("btnAddBudget")
     .addEventListener("click", function () {
@@ -629,7 +561,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("modalBudget").classList.remove("open");
     });
   });
-  // close when click out of the card
+
   window.addEventListener("click", function (e) {
     if (e.target.classList.contains("modal-overlay")) {
       e.target.classList.remove("open");
@@ -646,24 +578,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("modalConfirm").classList.add("open");
   }
 
-  // tombol cancel
   document
     .getElementById("confirmCancel")
     .addEventListener("click", function () {
       document.getElementById("modalConfirm").classList.remove("open");
     });
 
-  // tombol yes
   document.getElementById("confirmOk").addEventListener("click", function () {
     if (confirmCallback) confirmCallback();
     document.getElementById("modalConfirm").classList.remove("open");
   });
 });
-
-// 8. INIT
-// Jalankan renderDashboard() satu kali saat halaman pertama dibuka.
-
-// renderDashboard();
 
 document.addEventListener("DOMContentLoaded", function () {
   renderDashboard();

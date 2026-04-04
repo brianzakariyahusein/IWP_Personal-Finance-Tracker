@@ -1,15 +1,3 @@
-<!--
-Struktur file:
-  1. HEAD          — meta, font Google, link CSS
-  2. SIDEBAR       — navigasi kiri (logo + menu + logout)
-  3. MAIN CONTENT  — topbar + semua section
-     3a. DASHBOARD     — ringkasan keuangan (section pertama)
-     3b. TRANSACTIONS  — tabel transaksi + filter
-     3c. GOALS         — kartu saving goals
-     3d. BUDGET        — kartu budget per kategori
-  4. MODAL         — popup tambah data (tampilan saja)
-  5. SCRIPT        — urutan load: data.js → app.js
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,22 +16,13 @@ Struktur file:
 </head>
 
 <body>
-
-    <!-- 
-       2. SIDEBAR
-       Posisi fixed di kiri layar, selalu terlihat.
-       Setiap .nav-item punya data-section yang dibaca JS
-       untuk menentukan section mana yang ditampilkan.
-    -->
     <aside class="sidebar" id="sidebar">
 
-        <!-- Logo FinTrack -->
         <div class="sidebar-logo">
             <div class="logo-icon">F</div>
             <span>FinTrack</span>
         </div>
 
-        <!-- Menu navigasi utama -->
         <nav class="sidebar-nav">
             <a href="#" class="nav-item active" data-section="dashboard">
                 <span class="nav-icon">▦</span>
@@ -63,7 +42,6 @@ Struktur file:
             </a>
         </nav>
 
-        <!-- Menu bawah (help & logout) -->
         <div class="sidebar-bottom">
             <a href="#" class="nav-item">
                 <span class="nav-icon">?</span>
@@ -77,16 +55,8 @@ Struktur file:
 
     </aside>
 
-
-    <!--
-       3. MAIN CONTENT
-       Area konten di kanan sidebar.
-       Terdiri dari topbar (sticky) dan section-wrapper (scrollable).
-    -->
     <main class="main-content">
 
-        <!-- Topbar: judul halaman + notifikasi + info user -->
-        <!-- Judul diubah otomatis oleh JS saat navigasi -->
         <header class="topbar">
             <div class="topbar-left">
                 <h2 class="page-title" id="pageTitle">Dashboard</h2>
@@ -103,26 +73,15 @@ Struktur file:
             </div>
         </header>
 
-        <!-- Section wrapper: membungkus semua section, bisa di-scroll -->
-        <!-- Hanya satu section yang terlihat, diatur oleh class 'active' -->
         <div class="section-wrapper">
 
-
-            <!--
-                3a. SECTION: DASHBOARD
-                Section pertama yang muncul saat halaman dibuka.
-                Konten diisi oleh JavaScript (renderDashboard()).
-            -->
             <section class="section active" id="section-dashboard">
 
-                <!-- Teks sapaan -->
                 <div class="welcome-text">
                     <h3>Welcome back, Adaline! 👋</h3>
                     <p>Here's your financial overview</p>
                 </div>
 
-                <!-- 4 summary cards: balance, income, expense, savings -->
-                <!-- Nilai angka diisi oleh JS -->
                 <div class="summary-cards">
                     <div class="card summary-card">
                         <div class="card-label">Total Balance</div>
@@ -146,10 +105,8 @@ Struktur file:
                     </div>
                 </div>
 
-                <!-- Baris tengah: widget Budget (kiri) dan Saving Goals (kanan) -->
                 <div class="dashboard-middle">
 
-                    <!-- Widget Budget — diisi oleh renderDashboardBudget() -->
                     <div class="card">
                         <div class="card-header">
                             <h4>Budget</h4>
@@ -159,7 +116,6 @@ Struktur file:
                         <div class="pagination" id="paginationBudget"></div>
                     </div>
 
-                    <!-- Widget Saving Goals — diisi oleh renderDashboardGoals() -->
                     <div class="card">
                         <div class="card-header">
                             <h4>Saving Goals</h4>
@@ -171,8 +127,6 @@ Struktur file:
 
                 </div>
 
-                <!-- Baris bawah: tabel recent transactions (lebar penuh) -->
-                <!-- Diisi oleh renderDashboardTransactions() -->
                 <div class="card recent-transactions">
                     <div class="card-header">
                         <h4>Recent Transactions</h4>
@@ -197,15 +151,8 @@ Struktur file:
 
             </section>
 
-
-            <!--
-                3b. SECTION: TRANSACTIONS
-                Tabel semua transaksi dengan filter tipe & kategori.
-                Tombol "+ Add Transaction" membuka modal (tidak menyimpan data).
-            -->
             <section class="section" id="section-transactions">
 
-                <!-- Toolbar: filter di kiri, tombol add di kanan -->
                 <div class="section-toolbar">
                     <div class="filter-group">
                         <select id="filterType" class="filter-select">
@@ -220,7 +167,6 @@ Struktur file:
                     <button class="btn-primary" id="btnAddTransaction">+ Add Transaction</button>
                 </div>
 
-                <!-- Tabel transaksi — diisi oleh renderTransactions() -->
                 <div class="card">
                     <div class="transaction-table-wrapper">
                         <table class="transaction-table">
@@ -241,12 +187,6 @@ Struktur file:
 
             </section>
 
-
-            <!-- 
-                3c. SECTION: GOALS
-                Grid kartu saving goals.
-                Tombol "+ Add Goal" membuka modal (tidak menyimpan data).
-            -->
             <section class="section" id="section-goals">
 
                 <div class="section-toolbar">
@@ -254,17 +194,10 @@ Struktur file:
                     <button class="btn-primary" id="btnAddGoal">+ Add Goal</button>
                 </div>
 
-                <!-- Diisi oleh renderGoals() -->
                 <div class="goals-grid" id="goalsGrid"></div>
 
             </section>
 
-
-            <!-- 
-                3d. SECTION: BUDGET
-                Grid kartu budget per kategori.
-                Tombol "+ Add Budget" membuka modal (tidak menyimpan data).
-            -->
             <section class="section" id="section-budget">
 
                 <div class="section-toolbar">
@@ -272,24 +205,14 @@ Struktur file:
                     <button class="btn-primary" id="btnAddBudget">+ Add Budget</button>
                 </div>
 
-                <!-- Diisi oleh renderBudget() -->
                 <div class="budget-grid" id="budgetGrid"></div>
 
             </section>
 
-
         </div>
-        <!-- Akhir .section-wrapper -->
 
     </main>
 
-    <!-- 
-       4. MODAL
-       Diletakkan setelah script agar JS sudah siap saat modal dipakai.
-       Semua modal hanya tampilan — tombol Save TIDAK menyimpan data.
-    -->
-
-    <!-- Modal: Tambah Transaksi -->
     <div class="modal-overlay" id="modalTransaction">
         <div class="modal">
             <div class="modal-header">
@@ -333,7 +256,6 @@ Struktur file:
         </div>
     </div>
 
-    <!-- Modal: Tambah Saving Goal -->
     <div class="modal-overlay" id="modalGoal">
         <div class="modal">
             <div class="modal-header">
@@ -360,7 +282,6 @@ Struktur file:
         </div>
     </div>
 
-    <!-- Modal: Tambah Budget -->
     <div class="modal-overlay" id="modalBudget">
         <div class="modal">
             <div class="modal-header">
@@ -399,14 +320,9 @@ Struktur file:
         </div>
     </div>
 
-    <!-- 
-       5. SCRIPT
-         1. data.js  — definisikan array transactions, goals, budgets
-         2. app.js   — gunakan array dari data.js untuk render tampilan
-    -->
+    <!-- SCRIPT -->
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
-
 
 </body>
 

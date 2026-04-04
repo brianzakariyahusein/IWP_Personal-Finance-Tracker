@@ -1,16 +1,3 @@
-/*
-   FINTRACK — STYLE.CSS
-   Urutan:
-   1. Variables & Reset
-   2. Layout (Sidebar, Main, Topbar)
-   3. Section & Wrapper
-   4. Dashboard (Cards, Middle, Transactions)
-   5. Komponen UI (Pagination, Badge, Table)
-   6. Section Pages (Goals, Budget)
-   7. Modal & Form
-   8. Tombol (Button)
-*/
-
 /* 1. VARIABLES & RESET */
 :root {
   --primary: #7c5cfc;
