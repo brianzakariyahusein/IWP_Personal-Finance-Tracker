@@ -72,10 +72,8 @@ seeAllLinks.forEach(function (link) {
   });
 });
 
-// ============================================================
 // 2. HELPER
 // Fungsi bantu yang dipakai berulang di banyak tempat.
-// ============================================================
 
 // Format angka ke Rupiah — contoh: 1500 → "Rp 1,500.00"
 function formatCurrency(amount) {
@@ -134,10 +132,8 @@ function renderPagination(
   container.appendChild(nextBtn);
 }
 
-// ============================================================
 // 3. DASHBOARD
 // Menampilkan ringkasan keuangan di halaman utama.
-// ============================================================
 
 var dashPage = { transactions: 1, goals: 1, budget: 1 };
 var DASH_PER_PAGE = 5;
@@ -340,10 +336,8 @@ function renderDashboardBudget() {
   );
 }
 
-// ============================================================
 // 4. TRANSACTIONS
 // Tabel semua transaksi dengan filter tipe & kategori.
-// ============================================================
 
 var transPage = 1;
 var TRANS_PER_PAGE = 8;
@@ -453,10 +447,8 @@ document
     renderTransactions();
   });
 
-// ============================================================
 // 5. GOALS
 // Grid kartu saving goals.
-// ============================================================
 
 function renderGoals() {
   var grid = document.getElementById("goalsGrid");
@@ -498,10 +490,8 @@ function renderGoals() {
   });
 }
 
-// ============================================================
 // 6. BUDGET
 // Grid kartu budget per kategori.
-// ============================================================
 
 function renderBudget() {
   var grid = document.getElementById("budgetGrid");
@@ -549,10 +539,8 @@ function renderBudget() {
   });
 }
 
-// ============================================================
 // 7. MODAL
 // Buka/tutup modal saja — tombol Save tidak menyimpan data.
-// ============================================================
 
 document.addEventListener("DOMContentLoaded", function () {
   // Transaction
@@ -672,10 +660,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// ============================================================
 // 8. INIT
 // Jalankan renderDashboard() satu kali saat halaman pertama dibuka.
-// ============================================================
 
 // renderDashboard();
 
