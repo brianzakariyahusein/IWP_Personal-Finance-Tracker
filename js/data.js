@@ -1,6 +1,3 @@
-// ============================================================
-// DATA.JS — FinTrack Personal Finance Tracker
-//
 // File ini HANYA berisi data dummy (data contoh).
 // Semua data di sini bersifat statis — tidak ada yang disimpan
 // ke localStorage atau database manapun.
@@ -9,9 +6,7 @@
 //   1. transactions — daftar transaksi keuangan
 //   2. goals        — daftar saving goals
 //   3. budgets      — daftar budget per kategori
-// ============================================================
 
-// ============================================================
 // 1. TRANSACTIONS
 // Setiap transaksi punya properti:
 //   id       : nomor unik
@@ -21,8 +16,6 @@
 //   type     : 'income' (pemasukan) atau 'expense' (pengeluaran)
 //   category : kategori transaksi
 //   status   : 'successful' atau 'cancelled'
-// ============================================================
-
 const transactions = [
   {
     id: 1,
@@ -116,7 +109,6 @@ const transactions = [
   },
 ];
 
-// ============================================================
 // 2. GOALS
 // Setiap goal punya properti:
 //   id      : nomor unik
@@ -125,8 +117,6 @@ const transactions = [
 //   saved   : jumlah uang yang sudah ditabung
 //   dueDate : target tanggal selesai
 //   status  : 'in-progress', 'finished', atau 'cancelled'
-// ============================================================
-
 const goals = [
   {
     id: 1,
@@ -154,7 +144,6 @@ const goals = [
   },
 ];
 
-// ============================================================
 // 3. BUDGETS
 // Setiap budget punya properti:
 //   id       : nomor unik
@@ -162,8 +151,6 @@ const goals = [
 //   limit    : batas maksimal pengeluaran bulan ini
 //   spent    : jumlah yang sudah dikeluarkan bulan ini
 //   icon     : emoji untuk tampilan visual
-// ============================================================
-
 const budgets = [
   {
     id: 1,
