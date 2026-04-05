@@ -2,349 +2,349 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinTrack - Personal Finance Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinTrack - Personal Finance Tracker</title>
 
-    <!-- Google Fonts: Inter dipakai di seluruh tampilan -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Inter dipakai di seluruh tampilan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- stylesheet utama dan animasi -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
+  <!-- stylesheet utama dan animasi -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
 </head>
 
 <body>
 
-    <!-- overlay gelap di belakang sidebar saat mode mobile -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <!-- overlay gelap di belakang sidebar saat mode mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- sidebar navigasi -->
-    <aside class="sidebar" id="sidebar">
+  <!-- sidebar navigasi -->
+  <aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-logo">
-            <div class="logo-icon">F</div>
-            <span>FinTrack</span>
-        </div>
-
-        <nav class="sidebar-nav">
-            <a href="#" class="nav-item active" data-section="dashboard">
-                <span class="nav-icon">▦</span>
-                <span>Dashboard</span>
-            </a>
-            <a href="#" class="nav-item" data-section="transactions">
-                <span class="nav-icon">⇄</span>
-                <span>Transactions</span>
-            </a>
-            <a href="#" class="nav-item" data-section="goals">
-                <span class="nav-icon">◎</span>
-                <span>Goals</span>
-            </a>
-            <a href="#" class="nav-item" data-section="budget">
-                <span class="nav-icon">◑</span>
-                <span>Budget</span>
-            </a>
-        </nav>
-
-        <div class="sidebar-bottom">
-            <a href="#" class="nav-item">
-                <span class="nav-icon">?</span>
-                <span>Help</span>
-            </a>
-            <a href="404.html" class="nav-item">
-                <span class="nav-icon">→</span>
-                <span>Log out</span>
-            </a>
-        </div>
-
-    </aside>
-
-    <!-- area konten utama -->
-    <main class="main-content">
-
-        <!-- topbar dengan hamburger, judul halaman, dan info user -->
-        <header class="topbar">
-            <div class="topbar-left">
-                <!-- hamburger hanya terlihat di layar mobile/tablet -->
-                <button class="hamburger" id="hamburgerBtn">☰</button>
-                <h2 class="page-title" id="pageTitle">Dashboard</h2>
-            </div>
-            <div class="topbar-right">
-                <button class="btn-icon">🔔</button>
-                <div class="user-info">
-                    <div class="user-avatar">A</div>
-                    <!-- teks ini disembunyikan di layar kecil via CSS -->
-                    <div class="user-text">
-                        <p class="user-name">Adaline Lively</p>
-                        <p class="user-email">adaline@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- wrapper yang bisa di-scroll, menampung semua section -->
-        <div class="section-wrapper">
-
-            <!-- section dashboard -->
-            <section class="section active" id="section-dashboard">
-
-                <div class="welcome-text">
-                    <h3>Welcome back, Adaline! 👋</h3>
-                    <p>Here's your financial overview</p>
-                </div>
-
-                <!-- 4 kartu ringkasan di atas -->
-                <div class="summary-cards">
-                    <div class="card summary-card">
-                        <div class="card-label">Total Balance</div>
-                        <div class="card-amount" id="totalBalance">Rp 0.00</div>
-                        <div class="card-badge badge-success">↑ 12.1% vs last month</div>
-                    </div>
-                    <div class="card summary-card">
-                        <div class="card-label">Income</div>
-                        <div class="card-amount income" id="totalIncome">Rp 0.00</div>
-                        <div class="card-badge badge-success">↑ 6.3% vs last month</div>
-                    </div>
-                    <div class="card summary-card">
-                        <div class="card-label">Expense</div>
-                        <div class="card-amount expense" id="totalExpense">Rp 0.00</div>
-                        <div class="card-badge badge-danger">↑ 2.4% vs last month</div>
-                    </div>
-                    <div class="card summary-card">
-                        <div class="card-label">Total Savings</div>
-                        <div class="card-amount" id="totalSavings">Rp 0.00</div>
-                        <div class="card-badge badge-success">↑ 12.1% vs last month</div>
-                    </div>
-                </div>
-
-                <!-- kartu budget dan saving goals berdampingan -->
-                <div class="dashboard-middle">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Budget</h4>
-                            <a href="#" class="see-all" data-section="budget">See all →</a>
-                        </div>
-                        <div id="dashboardBudgetList"></div>
-                        <div class="pagination" id="paginationBudget"></div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Saving Goals</h4>
-                            <a href="#" class="see-all" data-section="goals">See all →</a>
-                        </div>
-                        <div id="goalsList"></div>
-                        <div class="pagination" id="paginationGoals"></div>
-                    </div>
-
-                </div>
-
-                <!-- tabel transaksi terbaru di bawah -->
-                <div class="card recent-transactions">
-                    <div class="card-header">
-                        <h4>Recent Transactions</h4>
-                        <a href="#" class="see-all" data-section="transactions">See all →</a>
-                    </div>
-                    <div class="transaction-table-wrapper">
-                        <table class="transaction-table">
-                            <thead>
-                                <tr>
-                                    <th>DATE</th>
-                                    <th>NAME</th>
-                                    <th>AMOUNT</th>
-                                    <th>CATEGORY</th>
-                                    <th>STATUS</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recentTransactionsList"></tbody>
-                        </table>
-                    </div>
-                    <div class="pagination" id="paginationTransactions"></div>
-                </div>
-
-            </section>
-
-            <!-- section halaman transaksi lengkap -->
-            <section class="section" id="section-transactions">
-
-                <div class="section-toolbar">
-                    <div class="filter-group">
-                        <select id="filterType" class="filter-select">
-                            <option value="all">All Types</option>
-                            <option value="income">Income</option>
-                            <option value="expense">Expense</option>
-                        </select>
-                        <select id="filterCategory" class="filter-select">
-                            <option value="all">All Categories</option>
-                        </select>
-                    </div>
-                    <button class="btn-primary" id="btnAddTransaction">+ Add Transaction</button>
-                </div>
-
-                <div class="card">
-                    <div class="transaction-table-wrapper">
-                        <table class="transaction-table">
-                            <thead>
-                                <tr>
-                                    <th>DATE</th>
-                                    <th>NAME</th>
-                                    <th>AMOUNT</th>
-                                    <th>CATEGORY</th>
-                                    <th>STATUS</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transactionTableBody"></tbody>
-                        </table>
-                    </div>
-                    <div class="pagination" id="paginationTransactionPage"></div>
-                </div>
-
-            </section>
-
-            <!-- section halaman saving goals -->
-            <section class="section" id="section-goals">
-
-                <div class="section-toolbar">
-                    <p class="section-subtitle">Track your saving progress</p>
-                    <button class="btn-primary" id="btnAddGoal">+ Add Goal</button>
-                </div>
-
-                <div class="goals-grid" id="goalsGrid"></div>
-
-            </section>
-
-            <!-- section halaman budget -->
-            <section class="section" id="section-budget">
-
-                <div class="section-toolbar">
-                    <p class="section-subtitle">Monitor your monthly spending</p>
-                    <button class="btn-primary" id="btnAddBudget">+ Add Budget</button>
-                </div>
-
-                <div class="budget-grid" id="budgetGrid"></div>
-
-            </section>
-
-        </div>
-
-    </main>
-
-    <!-- modal tambah transaksi -->
-    <div class="modal-overlay" id="modalTransaction">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Add Transaction</h3>
-                <button class="modal-close" id="closeModalTransaction">✕</button>
-            </div>
-            <div class="modal-body">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-input" id="inputTName" placeholder="e.g. Grocery shopping">
-
-                <label class="form-label">Amount</label>
-                <input type="number" class="form-input" id="inputTAmount" placeholder="e.g. 50000">
-
-                <label class="form-label">Type</label>
-                <select class="form-input" id="inputTType">
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                </select>
-
-                <label class="form-label">Category</label>
-                <select class="form-input" id="inputTCategory">
-                    <option value="Salary">Salary</option>
-                    <option value="Food & Groceries">Food & Groceries</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Bills & Utilities">Bills & Utilities</option>
-                    <option value="Health & Beauty">Health & Beauty</option>
-                    <option value="Education">Education</option>
-                    <option value="Investment">Investment</option>
-                    <option value="Cashback">Cashback</option>
-                    <option value="Refund">Refund</option>
-                    <option value="Other">Other</option>
-                </select>
-
-                <label class="form-label">Date</label>
-                <input type="date" class="form-input" id="inputTDate">
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="cancelModalTransaction">Cancel</button>
-                <button class="btn-primary" id="saveTransaction">Save</button>
-            </div>
-        </div>
+    <div class="sidebar-logo">
+      <div class="logo-icon">F</div>
+      <span>FinTrack</span>
     </div>
 
-    <!-- modal tambah saving goal -->
-    <div class="modal-overlay" id="modalGoal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Add Saving Goal</h3>
-                <button class="modal-close" id="closeModalGoal">✕</button>
-            </div>
-            <div class="modal-body">
-                <label class="form-label">Goal Name</label>
-                <input type="text" class="form-input" id="inputGName" placeholder="e.g. New Laptop">
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="dashboard">
+        <span class="nav-icon">▦</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-section="transactions">
+        <span class="nav-icon">⇄</span>
+        <span>Transactions</span>
+      </a>
+      <a href="#" class="nav-item" data-section="goals">
+        <span class="nav-icon">◎</span>
+        <span>Goals</span>
+      </a>
+      <a href="#" class="nav-item" data-section="budget">
+        <span class="nav-icon">◑</span>
+        <span>Budget</span>
+      </a>
+    </nav>
 
-                <label class="form-label">Target Amount</label>
-                <input type="number" class="form-input" id="inputGTarget" placeholder="e.g. 5000000">
-
-                <label class="form-label">Already Saved</label>
-                <input type="number" class="form-input" id="inputGSaved" placeholder="e.g. 1000000">
-
-                <label class="form-label">Due Date</label>
-                <input type="date" class="form-input" id="inputGDue">
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="cancelModalGoal">Cancel</button>
-                <button class="btn-primary" id="saveGoal">Save</button>
-            </div>
-        </div>
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item">
+        <span class="nav-icon">?</span>
+        <span>Help</span>
+      </a>
+      <a href="404.html" class="nav-item">
+        <span class="nav-icon">→</span>
+        <span>Log out</span>
+      </a>
     </div>
 
-    <!-- modal tambah budget -->
-    <div class="modal-overlay" id="modalBudget">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Add Budget</h3>
-                <button class="modal-close" id="closeModalBudget">✕</button>
-            </div>
-            <div class="modal-body">
-                <label class="form-label">Category</label>
-                <input type="text" class="form-input" id="inputBCategory" placeholder="e.g. Food & Groceries">
+  </aside>
 
-                <label class="form-label">Monthly Limit</label>
-                <input type="number" class="form-input" id="inputBLimit" placeholder="e.g. 500000">
+  <!-- area konten utama -->
+  <main class="main-content">
 
-                <label class="form-label">Icon (emoji)</label>
-                <input type="text" class="form-input" id="inputBIcon" placeholder="e.g. 🛒" maxlength="2">
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="cancelModalBudget">Cancel</button>
-                <button class="btn-primary" id="saveBudget">Save</button>
-            </div>
+    <!-- topbar dengan hamburger, judul halaman, dan info user -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <!-- hamburger hanya terlihat di layar mobile/tablet -->
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <h2 class="page-title" id="pageTitle">Dashboard</h2>
+      </div>
+      <div class="topbar-right">
+        <button class="btn-icon">🔔</button>
+        <div class="user-info">
+          <div class="user-avatar">A</div>
+          <!-- teks ini disembunyikan di layar kecil via CSS -->
+          <div class="user-text">
+            <p class="user-name">Adaline Lively</p>
+            <p class="user-email">adaline@gmail.com</p>
+          </div>
         </div>
+      </div>
+    </header>
+
+    <!-- wrapper yang bisa di-scroll, menampung semua section -->
+    <div class="section-wrapper">
+
+      <!-- section dashboard -->
+      <section class="section active" id="section-dashboard">
+
+        <div class="welcome-text">
+          <h3>Welcome back, Adaline! 👋</h3>
+          <p>Here's your financial overview</p>
+        </div>
+
+        <!-- 4 kartu ringkasan di atas -->
+        <div class="summary-cards">
+          <div class="card summary-card">
+            <div class="card-label">Total Balance</div>
+            <div class="card-amount" id="totalBalance">Rp 0.00</div>
+            <div class="card-badge badge-success">↑ 12.1% vs last month</div>
+          </div>
+          <div class="card summary-card">
+            <div class="card-label">Income</div>
+            <div class="card-amount income" id="totalIncome">Rp 0.00</div>
+            <div class="card-badge badge-success">↑ 6.3% vs last month</div>
+          </div>
+          <div class="card summary-card">
+            <div class="card-label">Expense</div>
+            <div class="card-amount expense" id="totalExpense">Rp 0.00</div>
+            <div class="card-badge badge-danger">↑ 2.4% vs last month</div>
+          </div>
+          <div class="card summary-card">
+            <div class="card-label">Total Savings</div>
+            <div class="card-amount" id="totalSavings">Rp 0.00</div>
+            <div class="card-badge badge-success">↑ 12.1% vs last month</div>
+          </div>
+        </div>
+
+        <!-- kartu budget dan saving goals berdampingan -->
+        <div class="dashboard-middle">
+
+          <div class="card">
+            <div class="card-header">
+              <h4>Budget</h4>
+              <a href="#" class="see-all" data-section="budget">See all →</a>
+            </div>
+            <div id="dashboardBudgetList"></div>
+            <div class="pagination" id="paginationBudget"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h4>Saving Goals</h4>
+              <a href="#" class="see-all" data-section="goals">See all →</a>
+            </div>
+            <div id="goalsList"></div>
+            <div class="pagination" id="paginationGoals"></div>
+          </div>
+
+        </div>
+
+        <!-- tabel transaksi terbaru di bawah -->
+        <div class="card recent-transactions">
+          <div class="card-header">
+            <h4>Recent Transactions</h4>
+            <a href="#" class="see-all" data-section="transactions">See all →</a>
+          </div>
+          <div class="transaction-table-wrapper">
+            <table class="transaction-table">
+              <thead>
+                <tr>
+                  <th>DATE</th>
+                  <th>NAME</th>
+                  <th>AMOUNT</th>
+                  <th>CATEGORY</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="recentTransactionsList"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="paginationTransactions"></div>
+        </div>
+
+      </section>
+
+      <!-- section halaman transaksi lengkap -->
+      <section class="section" id="section-transactions">
+
+        <div class="section-toolbar">
+          <div class="filter-group">
+            <select id="filterType" class="filter-select">
+              <option value="all">All Types</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+            <select id="filterCategory" class="filter-select">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+          <button class="btn-primary" id="btnAddTransaction">+ Add Transaction</button>
+        </div>
+
+        <div class="card">
+          <div class="transaction-table-wrapper">
+            <table class="transaction-table">
+              <thead>
+                <tr>
+                  <th>DATE</th>
+                  <th>NAME</th>
+                  <th>AMOUNT</th>
+                  <th>CATEGORY</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="transactionTableBody"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="paginationTransactionPage"></div>
+        </div>
+
+      </section>
+
+      <!-- section halaman saving goals -->
+      <section class="section" id="section-goals">
+
+        <div class="section-toolbar">
+          <p class="section-subtitle">Track your saving progress</p>
+          <button class="btn-primary" id="btnAddGoal">+ Add Goal</button>
+        </div>
+
+        <div class="goals-grid" id="goalsGrid"></div>
+
+      </section>
+
+      <!-- section halaman budget -->
+      <section class="section" id="section-budget">
+
+        <div class="section-toolbar">
+          <p class="section-subtitle">Monitor your monthly spending</p>
+          <button class="btn-primary" id="btnAddBudget">+ Add Budget</button>
+        </div>
+
+        <div class="budget-grid" id="budgetGrid"></div>
+
+      </section>
+
     </div>
 
-    <!-- modal konfirmasi sebelum simpan / tutup form -->
-    <div class="modal-overlay" id="modalConfirm">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 id="confirmTitle">Confirm</h3>
-            </div>
-            <div class="modal-body">
-                <p id="confirmMessage">Are you sure?</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="confirmCancel">Cancel</button>
-                <button class="btn-primary" id="confirmOk">Yes</button>
-            </div>
-        </div>
-    </div>
+  </main>
 
-    <!-- data statis dan logika aplikasi -->
-    <script src="js/data.js"></script>
-    <script src="js/app.js"></script>
+  <!-- modal tambah transaksi -->
+  <div class="modal-overlay" id="modalTransaction">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Transaction</h3>
+        <button class="modal-close" id="closeModalTransaction">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-input" id="inputTName" placeholder="e.g. Grocery shopping">
+
+        <label class="form-label">Amount</label>
+        <input type="number" class="form-input" id="inputTAmount" placeholder="e.g. 50000">
+
+        <label class="form-label">Type</label>
+        <select class="form-input" id="inputTType">
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+
+        <label class="form-label">Category</label>
+        <select class="form-input" id="inputTCategory">
+          <option value="Salary">Salary</option>
+          <option value="Food & Groceries">Food & Groceries</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Bills & Utilities">Bills & Utilities</option>
+          <option value="Health & Beauty">Health & Beauty</option>
+          <option value="Education">Education</option>
+          <option value="Investment">Investment</option>
+          <option value="Cashback">Cashback</option>
+          <option value="Refund">Refund</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label class="form-label">Date</label>
+        <input type="date" class="form-input" id="inputTDate">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="cancelModalTransaction">Cancel</button>
+        <button class="btn-primary" id="saveTransaction">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal tambah saving goal -->
+  <div class="modal-overlay" id="modalGoal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Saving Goal</h3>
+        <button class="modal-close" id="closeModalGoal">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label">Goal Name</label>
+        <input type="text" class="form-input" id="inputGName" placeholder="e.g. New Laptop">
+
+        <label class="form-label">Target Amount</label>
+        <input type="number" class="form-input" id="inputGTarget" placeholder="e.g. 5000000">
+
+        <label class="form-label">Already Saved</label>
+        <input type="number" class="form-input" id="inputGSaved" placeholder="e.g. 1000000">
+
+        <label class="form-label">Due Date</label>
+        <input type="date" class="form-input" id="inputGDue">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="cancelModalGoal">Cancel</button>
+        <button class="btn-primary" id="saveGoal">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal tambah budget -->
+  <div class="modal-overlay" id="modalBudget">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Budget</h3>
+        <button class="modal-close" id="closeModalBudget">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label">Category</label>
+        <input type="text" class="form-input" id="inputBCategory" placeholder="e.g. Food & Groceries">
+
+        <label class="form-label">Monthly Limit</label>
+        <input type="number" class="form-input" id="inputBLimit" placeholder="e.g. 500000">
+
+        <label class="form-label">Icon (emoji)</label>
+        <input type="text" class="form-input" id="inputBIcon" placeholder="e.g. 🛒" maxlength="2">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="cancelModalBudget">Cancel</button>
+        <button class="btn-primary" id="saveBudget">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal konfirmasi sebelum simpan / tutup form -->
+  <div class="modal-overlay" id="modalConfirm">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="confirmTitle">Confirm</h3>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="confirmCancel">Cancel</button>
+        <button class="btn-primary" id="confirmOk">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- data statis dan logika aplikasi -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 
 </body>
 
