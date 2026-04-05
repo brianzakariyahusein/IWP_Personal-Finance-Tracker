@@ -1,4 +1,4 @@
-/* 1. VARIABLES & RESET */
+/* color tokens & global reset */
 :root {
   --primary: #7c5cfc;
   --primary-light: #ede9ff;
@@ -12,6 +12,7 @@
   --border: #e5e7eb;
   --radius: 16px;
   --shadow: 0 2px 12px rgba(124, 92, 252, 0.08);
+  --sidebar-width: 240px;
 }
 
 * {
@@ -28,10 +29,9 @@ body {
   min-height: 100vh;
 }
 
-/* 2. LAYOUT */
-/* --- Sidebar --- */
+/* sidebar */
 .sidebar {
-  width: 240px;
+  width: var(--sidebar-width);
   min-height: 100vh;
   background-color: var(--white);
   border-right: 1px solid var(--border);
@@ -42,6 +42,36 @@ body {
   top: 0;
   left: 0;
   bottom: 0;
+  z-index: 200;
+  transition: transform 0.3s ease;
+}
+
+/* hamburger button — hanya muncul di mobile */
+.hamburger {
+  display: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* overlay gelap di belakang sidebar saat mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 150;
+}
+
+.sidebar-overlay.open {
+  display: block;
 }
 
 .sidebar-logo {
@@ -63,6 +93,7 @@ body {
   justify-content: center;
   font-weight: 700;
   font-size: 18px;
+  flex-shrink: 0;
 }
 
 .sidebar-logo span {
@@ -105,6 +136,7 @@ body {
   font-size: 16px;
   width: 20px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .sidebar-bottom {
@@ -115,9 +147,9 @@ body {
   padding-top: 16px;
 }
 
-/* Main Content */
+/* main content area */
 .main-content {
-  margin-left: 240px;
+  margin-left: var(--sidebar-width);
   flex: 1;
   overflow: hidden;
   display: flex;
@@ -125,29 +157,39 @@ body {
   height: 100vh;
 }
 
-/* Topbar */
+/* topbar */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 32px;
+  padding: 20px 32px;
   flex-shrink: 0;
   background-color: var(--bg-main);
   position: sticky;
   top: 0;
   z-index: 10;
+  gap: 12px;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
 }
 
 .page-title {
   font-size: 24px;
   font-weight: 700;
   color: var(--text-dark);
+  white-space: nowrap;
 }
 
 .topbar-right {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
 }
 
 .btn-icon {
@@ -184,32 +226,39 @@ body {
   justify-content: center;
   font-weight: 700;
   font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* teks user disembunyikan di layar kecil */
+.user-text {
+  display: flex;
+  flex-direction: column;
 }
 
 .user-name {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-dark);
+  white-space: nowrap;
 }
 
 .user-email {
   font-size: 11px;
   color: var(--text-gray);
+  white-space: nowrap;
 }
 
-/* 3. SECTION & WRAPPER */
+/* section wrapper — area scroll utama */
 .section-wrapper {
   flex: 1;
   overflow-y: auto;
   padding: 0 32px 32px 32px;
 }
 
-/* Semua section disembunyikan dulu */
 .section {
   display: none;
 }
 
-/* Section yang aktif ditampilkan */
 .section.active {
   display: block;
 }
@@ -219,8 +268,7 @@ body {
   flex-direction: column;
 }
 
-/* 4. DASHBOARD */
-/* Welcome text */
+/* welcome text */
 .welcome-text {
   margin-bottom: 24px;
 }
@@ -237,7 +285,7 @@ body {
   margin-top: 4px;
 }
 
-/* Summary Cards (4 kolom) */
+/* summary cards — 4 kolom di desktop */
 .summary-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -265,19 +313,21 @@ body {
 }
 
 .card-amount {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-dark);
+  word-break: break-all;
 }
 
 .card-amount.income {
   color: var(--success);
 }
+
 .card-amount.expense {
   color: var(--danger);
 }
 
-/* Dashboard Middle (Budget + Goals, 2 kolom) */
+/* dashboard middle — budget & goals, 2 kolom */
 .dashboard-middle {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -288,6 +338,7 @@ body {
 .dashboard-middle .card {
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 .dashboard-middle .card > div[id] {
@@ -300,7 +351,7 @@ body {
   padding-top: 8px;
 }
 
-/* Recent Transactions (full width) */
+/* recent transactions */
 .recent-transactions {
   display: flex;
   flex-direction: column;
@@ -310,9 +361,10 @@ body {
 .recent-transactions .transaction-table-wrapper {
   max-height: 200px;
   overflow-y: auto;
+  overflow-x: auto;
 }
 
-/* Card Header */
+/* card header */
 .card-header {
   display: flex;
   align-items: center;
@@ -332,15 +384,14 @@ body {
   color: var(--primary);
   text-decoration: none;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .see-all:hover {
   text-decoration: underline;
 }
 
-/* 5. KOMPONEN UI */
-
-/* Badge */
+/* badges */
 .card-badge {
   font-size: 12px;
   font-weight: 500;
@@ -353,33 +404,37 @@ body {
   background-color: #dcfce7;
   color: var(--success);
 }
+
 .badge-danger {
   background-color: #fee2e2;
   color: var(--danger);
 }
+
 .badge-warning {
   background-color: #fef3c7;
   color: var(--warning);
 }
 
-/* Status Badge (di tabel) */
+/* status badge di tabel */
 .status-badge {
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 11px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .status-successful {
   background-color: #dcfce7;
   color: var(--success);
 }
+
 .status-cancelled {
   background-color: #fee2e2;
   color: var(--danger);
 }
 
-/* Pagination */
+/* pagination */
 .pagination {
   display: flex;
   align-items: center;
@@ -387,6 +442,7 @@ body {
   gap: 8px;
   margin-top: 12px;
   flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .pagination button {
@@ -418,11 +474,17 @@ body {
   cursor: not-allowed;
 }
 
-/* Transaction Table */
+/* transaction table */
+.transaction-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .transaction-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  min-width: 480px;
 }
 
 .transaction-table th {
@@ -433,6 +495,7 @@ body {
   border-bottom: 1px solid var(--border);
   font-size: 11px;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .transaction-table td {
@@ -449,12 +512,13 @@ body {
   color: var(--success);
   font-weight: 600;
 }
+
 .amount-expense {
   color: var(--danger);
   font-weight: 600;
 }
 
-/* Progress Bar */
+/* progress bar */
 .progress-bar {
   width: 100%;
   height: 8px;
@@ -470,7 +534,7 @@ body {
   transition: width 0.6s ease;
 }
 
-/* Goal Item (di dashboard widget) */
+/* goal item — dipakai di widget dashboard */
 .goal-item {
   margin-bottom: 20px;
 }
@@ -483,6 +547,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 6px;
+  gap: 8px;
 }
 
 .goal-name {
@@ -494,6 +559,7 @@ body {
 .goal-amount {
   font-size: 13px;
   color: var(--text-gray);
+  white-space: nowrap;
 }
 
 .goal-percent {
@@ -502,15 +568,15 @@ body {
   margin-top: 4px;
 }
 
-/* 6. SECTION PAGES */
-
-/* Toolbar (atas setiap section page) */
+/* toolbar atas setiap halaman section */
 .section-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .section-subtitle {
@@ -521,6 +587,7 @@ body {
 .filter-group {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .filter-select {
@@ -539,7 +606,7 @@ body {
   border-color: var(--primary);
 }
 
-/* Goals Grid (3 kolom) */
+/* goals grid — 3 kolom di desktop */
 .goals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -572,7 +639,7 @@ body {
   margin-top: 8px;
 }
 
-/* Budget Grid (2 kolom) */
+/* budget grid — 2 kolom di desktop */
 .budget-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -602,15 +669,16 @@ body {
   gap: 8px;
 }
 
-/* 7. MODAL & FORM */
+/* modal & form */
 .modal-overlay {
   display: none;
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 100;
+  z-index: 300;
   align-items: center;
   justify-content: center;
+  padding: 16px;
 }
 
 .modal-overlay.open {
@@ -618,17 +686,18 @@ body {
 }
 
 #modalConfirm .modal {
-  width: 35%;
+  width: min(400px, 90%);
 }
 
 .modal {
   background: var(--white);
   border-radius: var(--radius);
-  width: 420px;
-  max-width: 90%;
+  width: min(420px, 100%);
   padding: 28px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   animation: fadeIn 0.2s ease forwards;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-header {
@@ -690,7 +759,7 @@ body {
   box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.1);
 }
 
-/* 8. TOMBOL */
+/* tombol */
 .btn-primary {
   padding: 10px 20px;
   background-color: var(--primary);
@@ -701,6 +770,7 @@ body {
   font-weight: 600;
   font-family: "Inter", sans-serif;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-secondary {
@@ -727,4 +797,147 @@ body {
 
 .btn-delete:hover {
   background-color: #fee2e2;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* tablet — layar 1024px ke bawah */
+@media (max-width: 1024px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .goals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* tablet kecil — layar 768px ke bawah */
+@media (max-width: 768px) {
+  /* sidebar berubah jadi drawer yang bisa geser */
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  /* hamburger muncul */
+  .hamburger {
+    display: flex;
+  }
+
+  /* main content pakai full width karena sidebar sudah tidak nempel */
+  .main-content {
+    margin-left: 0;
+  }
+
+  .topbar {
+    padding: 16px 20px;
+  }
+
+  .section-wrapper {
+    padding: 0 20px 24px 20px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  /* summary cards jadi 2 kolom */
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* budget & goals di dashboard jadi 1 kolom */
+  .dashboard-middle {
+    grid-template-columns: 1fr;
+  }
+
+  /* budget grid jadi 1 kolom */
+  .budget-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* goals grid jadi 2 kolom */
+  .goals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* teks user di topbar disembunyikan biar ga makan tempat */
+  .user-text {
+    display: none;
+  }
+
+  .user-info {
+    padding: 8px 10px;
+  }
+}
+
+/* mobile — layar 480px ke bawah */
+@media (max-width: 480px) {
+  .topbar {
+    padding: 14px 16px;
+  }
+
+  .section-wrapper {
+    padding: 0 16px 20px 16px;
+  }
+
+  /* semua grid jadi 1 kolom */
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .goals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .budget-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* font summary card sedikit dikecilkan */
+  .card-amount {
+    font-size: 20px;
+  }
+
+  .welcome-text h3 {
+    font-size: 18px;
+  }
+
+  /* section toolbar stack ke bawah */
+  .section-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* filter group full width di mobile */
+  .filter-group {
+    width: 100%;
+  }
+
+  .filter-select {
+    flex: 1;
+  }
+
+  /* tombol add full width di toolbar */
+  .section-toolbar .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+
+  .modal-footer .btn-primary,
+  .modal-footer .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -6,16 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinTrack - Personal Finance Tracker</title>
 
-    <!-- Google Fonts: Inter (dipakai di seluruh tampilan) -->
+    <!-- Google Fonts: Inter dipakai di seluruh tampilan -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- CSS utama dan animasi -->
+    <!-- stylesheet utama dan animasi -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
 </head>
 
 <body>
+
+    <!-- overlay gelap di belakang sidebar saat mode mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- sidebar navigasi -->
     <aside class="sidebar" id="sidebar">
 
         <div class="sidebar-logo">
@@ -55,17 +60,22 @@
 
     </aside>
 
+    <!-- area konten utama -->
     <main class="main-content">
 
+        <!-- topbar dengan hamburger, judul halaman, dan info user -->
         <header class="topbar">
             <div class="topbar-left">
+                <!-- hamburger hanya terlihat di layar mobile/tablet -->
+                <button class="hamburger" id="hamburgerBtn">☰</button>
                 <h2 class="page-title" id="pageTitle">Dashboard</h2>
             </div>
             <div class="topbar-right">
                 <button class="btn-icon">🔔</button>
                 <div class="user-info">
                     <div class="user-avatar">A</div>
-                    <div>
+                    <!-- teks ini disembunyikan di layar kecil via CSS -->
+                    <div class="user-text">
                         <p class="user-name">Adaline Lively</p>
                         <p class="user-email">adaline@gmail.com</p>
                     </div>
@@ -73,8 +83,10 @@
             </div>
         </header>
 
+        <!-- wrapper yang bisa di-scroll, menampung semua section -->
         <div class="section-wrapper">
 
+            <!-- section dashboard -->
             <section class="section active" id="section-dashboard">
 
                 <div class="welcome-text">
@@ -82,6 +94,7 @@
                     <p>Here's your financial overview</p>
                 </div>
 
+                <!-- 4 kartu ringkasan di atas -->
                 <div class="summary-cards">
                     <div class="card summary-card">
                         <div class="card-label">Total Balance</div>
@@ -105,6 +118,7 @@
                     </div>
                 </div>
 
+                <!-- kartu budget dan saving goals berdampingan -->
                 <div class="dashboard-middle">
 
                     <div class="card">
@@ -127,6 +141,7 @@
 
                 </div>
 
+                <!-- tabel transaksi terbaru di bawah -->
                 <div class="card recent-transactions">
                     <div class="card-header">
                         <h4>Recent Transactions</h4>
@@ -151,6 +166,7 @@
 
             </section>
 
+            <!-- section halaman transaksi lengkap -->
             <section class="section" id="section-transactions">
 
                 <div class="section-toolbar">
@@ -187,6 +203,7 @@
 
             </section>
 
+            <!-- section halaman saving goals -->
             <section class="section" id="section-goals">
 
                 <div class="section-toolbar">
@@ -198,6 +215,7 @@
 
             </section>
 
+            <!-- section halaman budget -->
             <section class="section" id="section-budget">
 
                 <div class="section-toolbar">
@@ -213,6 +231,7 @@
 
     </main>
 
+    <!-- modal tambah transaksi -->
     <div class="modal-overlay" id="modalTransaction">
         <div class="modal">
             <div class="modal-header">
@@ -256,6 +275,7 @@
         </div>
     </div>
 
+    <!-- modal tambah saving goal -->
     <div class="modal-overlay" id="modalGoal">
         <div class="modal">
             <div class="modal-header">
@@ -282,6 +302,7 @@
         </div>
     </div>
 
+    <!-- modal tambah budget -->
     <div class="modal-overlay" id="modalBudget">
         <div class="modal">
             <div class="modal-header">
@@ -305,6 +326,7 @@
         </div>
     </div>
 
+    <!-- modal konfirmasi sebelum simpan / tutup form -->
     <div class="modal-overlay" id="modalConfirm">
         <div class="modal">
             <div class="modal-header">
@@ -320,7 +342,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- data statis dan logika aplikasi -->
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
 

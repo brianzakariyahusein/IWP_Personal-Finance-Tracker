@@ -1,4 +1,5 @@
-const transactions = [
+// data transaksi — dipakai di dashboard dan halaman transactions
+var transactions = [
   {
     id: 1,
     date: "2024-06-02",
@@ -91,7 +92,8 @@ const transactions = [
   },
 ];
 
-const goals = [
+// data saving goals — dipakai di dashboard widget dan halaman goals
+var goals = [
   {
     id: 1,
     name: "MacBook Pro",
@@ -118,7 +120,8 @@ const goals = [
   },
 ];
 
-const budgets = [
+// data budget per kategori — dipakai di dashboard widget dan halaman budget
+var budgets = [
   {
     id: 1,
     category: "Food & Groceries",

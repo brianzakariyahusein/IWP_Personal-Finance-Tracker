@@ -1,3 +1,4 @@
+/* keyframe definitions */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -20,23 +21,27 @@
   }
 }
 
+/* animasi masuk saat section aktif */
 .section.active {
   animation: fadeIn 0.3s ease forwards;
 }
 
+/* semua card fade in saat dimuat */
 .card {
   animation: fadeIn 0.4s ease forwards;
 }
 
+/* nav item geser dari kiri */
 .nav-item {
   animation: slideInLeft 0.3s ease forwards;
 }
 
-
+/* progress bar animasi smooth saat width berubah */
 .progress-fill {
   transition: width 0.6s ease;
 }
 
+/* hover efek summary card */
 .summary-card {
   transition:
     transform 0.2s ease,
@@ -48,6 +53,7 @@
   box-shadow: 0 8px 24px rgba(124, 92, 252, 0.15);
 }
 
+/* hover efek tombol primary */
 .btn-primary {
   transition:
     transform 0.15s ease,

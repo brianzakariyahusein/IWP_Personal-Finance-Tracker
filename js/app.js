@@ -1,7 +1,9 @@
+// referensi elemen navigasi dan section
 var navItems = document.querySelectorAll(".nav-item[data-section]");
 var sections = document.querySelectorAll(".section");
 var pageTitle = document.getElementById("pageTitle");
 
+// navigasi antar section
 function navigateTo(sectionName) {
   navItems.forEach(function (item) {
     item.classList.remove("active");
@@ -21,12 +23,16 @@ function navigateTo(sectionName) {
   pageTitle.textContent =
     sectionName.charAt(0).toUpperCase() + sectionName.slice(1);
 
+  // tutup sidebar drawer kalau di mobile setelah klik nav
+  closeSidebar();
+
   if (sectionName === "dashboard") renderDashboard();
   if (sectionName === "transactions") renderTransactions();
   if (sectionName === "goals") renderGoals();
   if (sectionName === "budget") renderBudget();
 }
 
+// pasang listener ke semua nav item
 navItems.forEach(function (item) {
   item.addEventListener("click", function (e) {
     e.preventDefault();
@@ -34,6 +40,7 @@ navItems.forEach(function (item) {
   });
 });
 
+// "see all" link di widget dashboard juga trigger navigasi
 var seeAllLinks = document.querySelectorAll(".see-all[data-section]");
 seeAllLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
@@ -42,15 +49,39 @@ seeAllLinks.forEach(function (link) {
   });
 });
 
+// fungsi buka/tutup sidebar drawer di mobile
+function openSidebar() {
+  document.getElementById("sidebar").classList.add("open");
+  document.getElementById("sidebarOverlay").classList.add("open");
+}
+
+function closeSidebar() {
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("sidebarOverlay").classList.remove("open");
+}
+
+// hamburger buka sidebar
+document.getElementById("hamburgerBtn").addEventListener("click", function () {
+  openSidebar();
+});
+
+// klik overlay gelap menutup sidebar
+document.getElementById("sidebarOverlay").addEventListener("click", function () {
+  closeSidebar();
+});
+
+// format angka ke rupiah
 function formatCurrency(amount) {
   return "Rp " + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// helper pagination: potong array sesuai halaman
 function paginate(data, page, perPage) {
   var start = (page - 1) * perPage;
   return data.slice(start, start + perPage);
 }
 
+// render tombol pagination ke container tertentu
 function renderPagination(
   containerId,
   totalItems,
@@ -62,7 +93,8 @@ function renderPagination(
   var container = document.getElementById(containerId);
   container.innerHTML = "";
 
-  if (totalPages <= 1) return; // tidak perlu pagination kalau cuma 1 halaman
+  // tidak perlu pagination kalau hanya 1 halaman
+  if (totalPages <= 1) return;
 
   var prevBtn = document.createElement("button");
   prevBtn.textContent = "←";
@@ -93,9 +125,11 @@ function renderPagination(
   container.appendChild(nextBtn);
 }
 
+// state halaman untuk widget dashboard
 var dashPage = { transactions: 1, goals: 1, budget: 1 };
 var DASH_PER_PAGE = 5;
 
+// hitung total income dari array transactions
 function getTotalIncome() {
   var total = 0;
   transactions.forEach(function (t) {
@@ -104,6 +138,7 @@ function getTotalIncome() {
   return total;
 }
 
+// hitung total expense dari array transactions
 function getTotalExpense() {
   var total = 0;
   transactions.forEach(function (t) {
@@ -112,6 +147,7 @@ function getTotalExpense() {
   return total;
 }
 
+// hitung total uang yang sudah ditabung dari semua goals
 function getTotalSavings() {
   var total = 0;
   goals.forEach(function (g) {
@@ -120,6 +156,7 @@ function getTotalSavings() {
   return total;
 }
 
+// render seluruh dashboard: summary cards + 3 widget
 function renderDashboard() {
   var income = getTotalIncome();
   var expense = getTotalExpense();
@@ -137,6 +174,7 @@ function renderDashboard() {
   renderDashboardBudget();
 }
 
+// widget tabel transaksi di dashboard
 function renderDashboardTransactions() {
   var tbody = document.getElementById("recentTransactionsList");
   tbody.innerHTML = "";
@@ -186,6 +224,7 @@ function renderDashboardTransactions() {
   );
 }
 
+// widget saving goals di dashboard
 function renderDashboardGoals() {
   var container = document.getElementById("goalsList");
   container.innerHTML = "";
@@ -230,6 +269,7 @@ function renderDashboardGoals() {
   );
 }
 
+// widget budget di dashboard
 function renderDashboardBudget() {
   var container = document.getElementById("dashboardBudgetList");
   container.innerHTML = "";
@@ -286,9 +326,11 @@ function renderDashboardBudget() {
   );
 }
 
+// state halaman untuk tabel transaksi di section transactions
 var transPage = 1;
 var TRANS_PER_PAGE = 8;
 
+// render tabel transaksi lengkap dengan filter
 function renderTransactions() {
   var filterType = document.getElementById("filterType").value;
   var filterCategory = document.getElementById("filterCategory").value;
@@ -311,6 +353,7 @@ function renderTransactions() {
   var tbody = document.getElementById("transactionTableBody");
   tbody.innerHTML = "";
 
+  // tampilkan pesan kalau tidak ada hasil
   if (paged.length === 0) {
     tbody.innerHTML =
       '<tr><td colspan="5" style="text-align:center;color:var(--text-gray);padding:24px;">No transactions found</td></tr>';
@@ -360,6 +403,7 @@ function renderTransactions() {
   );
 }
 
+// isi dropdown filter kategori dari data yang ada
 function populateCategoryFilter() {
   var select = document.getElementById("filterCategory");
   var current = select.value;
@@ -380,6 +424,7 @@ function populateCategoryFilter() {
   });
 }
 
+// reset halaman saat filter berubah
 document.getElementById("filterType").addEventListener("change", function () {
   transPage = 1;
   renderTransactions();
@@ -391,6 +436,7 @@ document
     renderTransactions();
   });
 
+// render grid kartu saving goals
 function renderGoals() {
   var grid = document.getElementById("goalsGrid");
   grid.innerHTML = "";
@@ -431,6 +477,7 @@ function renderGoals() {
   });
 }
 
+// render grid kartu budget
 function renderBudget() {
   var grid = document.getElementById("budgetGrid");
   grid.innerHTML = "";
@@ -477,7 +524,10 @@ function renderBudget() {
   });
 }
 
+// semua event listener modal dipasang setelah DOM siap
 document.addEventListener("DOMContentLoaded", function () {
+
+  // modal transaksi
   document
     .getElementById("btnAddTransaction")
     .addEventListener("click", function () {
@@ -508,6 +558,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
+  // modal goal
   document.getElementById("btnAddGoal").addEventListener("click", function () {
     document.getElementById("modalGoal").classList.add("open");
   });
@@ -534,6 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // modal budget
   document
     .getElementById("btnAddBudget")
     .addEventListener("click", function () {
@@ -562,12 +614,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // klik di luar modal menutupnya, kecuali modal konfirmasi
   window.addEventListener("click", function (e) {
-    if (e.target.classList.contains("modal-overlay")) {
+    if (
+      e.target.classList.contains("modal-overlay") &&
+      e.target.id !== "modalConfirm"
+    ) {
       e.target.classList.remove("open");
     }
   });
 
+  // state callback untuk modal konfirmasi
   var confirmCallback = null;
 
   function openConfirm(title, message, callback) {
@@ -590,6 +647,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// render dashboard saat halaman pertama kali dibuka
 document.addEventListener("DOMContentLoaded", function () {
   renderDashboard();
-});
+}); 
